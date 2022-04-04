@@ -1,20 +1,18 @@
-#include <asm-generic/errno.h>
 #include <iostream>
 #include <random>
-#include <string>
 #include <vector>
 using namespace std;
-
-vector<int> Uniform(int quantity);
-vector<int> Normal(int quantity);
-vector<int> Geometric(int quantity);
 
 int main() {
     string choice; 
     int quantity;
-    int mode;
-    vector<int> starsnm;
+    int nm;
     vector<string> stars;
+    mt19937 generator(time(NULL));
+    uniform_int_distribution<int> uniform(0,100);
+    normal_distribution<float> normal(50,10);
+    geometric_distribution<int> geometric(.05);
+
  
     cout << "uniform, normal, or geometric?\n";
     cin >> choice;
@@ -22,57 +20,23 @@ int main() {
     cout << "how many numbers do you want between 0 and 100\n";
     cin >> quantity;
 
-    if (choice == "uniform") {
-        starsnm = Uniform(quantity);
-    } else if (choice == "normal") {
-        starsnm = Normal(quantity);
-    } else if (choice == "geometric") {
-        starsnm = Geometric(quantity);
-    } else {
-        cout << "no";
-        return 0;
-    }
-
     for (int i = 0; i < 11; i++) stars.push_back("");
 
-    for (int i = 0; i < starsnm.size(); i++) {
-        if (starsnm) < 10
-    }
-}
-
-vector<int> Uniform(int quantity) {
-    mt19937 generator(time(NULL));
-    uniform_int_distribution<int> uniform(0,100);
-    vector<int> starsnm;
-    int number;
-
     for (int i = 0; i < quantity; i++) {
-        starsnm.push_back(uniform(generator));
+        if (choice == "uniform") {
+            nm = uniform(generator)/10;
+            stars[nm] += "*";
+        } else if (choice == "normal") {
+            nm = normal(generator)/ 10;
+            stars[nm] += "*";
+        } else if (choice == "geometric") {
+            nm = geometric(generator)/ 10;
+            stars[nm] += "*";
+        } 
     }
 
-    return starsnm;
-}
-vector<int> Normal(int quantity){
-    mt19937 generator(time(NULL));
-    normal_distribution<float> normal(50,10);
-    vector<int> starsnm;
-    int number;
-
-    for (int i = 0; i < quantity; i++) {
-        starsnm.push_back(normal(generator));
+    for (int i = 0; i < 10; i++) {
+        cout << i << "0 - " << i << "9 : " << stars[i] << endl;
     }
-
-    return starsnm;
-}
-vector<int> Geometric(int quantity){
-    mt19937 generator(time(NULL));
-    geometric_distribution<int> geometric(.05);
-    vector<int> starsnm;
-    int number;
-
-    for (int i = 0; i < quantity; i++) {
-        starsnm.push_back(geometric(generator));
-    }
-
-    return starsnm;
+    cout << "    100 : " << stars[10] << endl;
 }
