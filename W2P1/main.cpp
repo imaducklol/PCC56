@@ -14,7 +14,7 @@ int main() {
         float sum;
         cin >> input;
         if (input == -1) {
-            sum = sum / inputCount;
+            sum = sum / (float)inputCount;
             cout << "average = " << sum << endl;
             break;
         }

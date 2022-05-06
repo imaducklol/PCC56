@@ -64,14 +64,14 @@ int main () {
     while (running) {
 
         while (true) {
-            cout << "It is player X's turn, please select a number\n";
+            cout << "It is player " << player << "'s turn, please select a number\n";
             displayBoard(board);
             cin >> choice;
-            if (choice != 'O' && choice != 'X' &&
+            if (board[choice/3][choice%3] != "O" && board[choice/3][choice%3] != "X" &&
             1 <= choice && choice <= 9) break;
             else cout << "That's not valid\n";
         }
-        break;
+        
         
     }
 
