@@ -28,7 +28,7 @@ bool checkBoard (string (&b)[3][3], string check) {
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             if (b[x][y] != check) break;
-            if (y == 3) return true;
+            if (y == 2) return true;
         }
     } 
     // Diagonal
@@ -36,7 +36,7 @@ bool checkBoard (string (&b)[3][3], string check) {
     for (int x = 0; x < 3; x++) {
         y = x;
         if (b[x][y] != check) break;
-        if (x == 3) return true;
+        if (x == 2) return true;
     }
     // Anti Diagonal
     // Diagonal
@@ -65,18 +65,26 @@ int main () {
     // Play
     bool running = true;
     string player = "X";
+    string schoice;
     int choice;
     while (running) {
         while (true) {
+            system("clear");
             cout << "It is player " << player << "'s turn, please select a number\n";
             displayBoard(board);
-            cin >> choice;
+            cin >> schoice;
+            try {
+            choice = stoi(schoice);
+            } catch () {
+            continue;
+            }
+            choice = stoi(schoice);
             if (board[(choice-1)%3][(choice-1)/3] != "O" && board[(choice-1)%3][(choice-1)/3] != "X" &&
             1 <= choice && choice <= 9) break;
             else cout << "That's not valid\n";
         }
         board[(choice-1)%3][(choice-1)/3] = player;
-        if (checkBoard(board, player)) {
+        if (checkBoard(board, player) ) {
             running = false;
             cout << "Player " << player << " won!";
         }
