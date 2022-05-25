@@ -13,7 +13,6 @@ void displayBoard (string (&b)[3][3]) {
     cout << b[0][1] << "|" << b[1][1] << "|" << b[2][1] << endl;
     cout << "-" << "+" << "-" << "+" << "-" << endl;
     cout << b[0][2] << "|" << b[1][2] << "|" << b[2][2] << endl;
-    cout << "-" << "+" << "-" << "+" << "-" << endl;
 }
 
 bool checkBoard (string (&b)[3][3], string check) {
@@ -67,6 +66,7 @@ int main () {
     string player = "X";
     string schoice;
     int choice;
+    int turncount = 0;
     while (running) {
         while (true) {
             system("clear");
@@ -75,7 +75,7 @@ int main () {
             cin >> schoice;
             try {
             choice = stoi(schoice);
-            } catch () {
+            } catch (exception &err) {
             continue;
             }
             choice = stoi(schoice);
@@ -85,10 +85,15 @@ int main () {
         }
         board[(choice-1)%3][(choice-1)/3] = player;
         if (checkBoard(board, player) ) {
-            running = false;
             cout << "Player " << player << " won!";
+            return 0;
         }
         player == "X" ? player = "O" : player = "X";
+        turncount += 1;
+        if (turncount > 8) {
+            cout << "It's a tie!" << endl;
+            return 1;
+        }
 
         
         
